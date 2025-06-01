@@ -11,7 +11,7 @@
 !.yarn/versions
 
 #vs code
-/.vscode/
+/.vscode
 
 
 # testing
