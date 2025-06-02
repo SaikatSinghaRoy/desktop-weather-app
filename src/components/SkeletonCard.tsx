@@ -1,3 +1,4 @@
+'use client'
 import React from "react"
 import { Skeleton } from "./ui/skeleton"
 
@@ -93,5 +94,5 @@ export default function SkeletonCard( {check}:Props ) {
                 </section>
             </div>
         </div>
-  )
+    )
 }
