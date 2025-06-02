@@ -2,48 +2,57 @@
 import React, { useState, useEffect } from "react";
 import Dashboard from "@/components/Dashboard";
 import Search from "@/components/Search";
-import {Weather,DailyForecast,HourlyForecast,WeatherCache,} from "@/utils/types";
+import {CurrentWeather,DailyForecast,HourlyForecast,WeatherCache,} from "@/utils/types";
 import SkeletonCard from "@/components/SkeletonCard";
 
 export default function Home() {
-    const [weather, setWeather] = useState<Weather | null>(null);
+    const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
     const [dailyForecast, setDailyForecast] = useState<DailyForecast>({
         data: [],
     });
     const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast>({
         data: [],
     });
+
+    // to get the locally saved data...
+    // if no data found, create a checker flag... 
+    const [check, setCheck] = useState<boolean>(false);
     useEffect(() => {
         const cached = localStorage.getItem("WeatherCache");
         if (cached) {
             const parsed: WeatherCache = JSON.parse(cached);
-            setWeather(parsed.weather);
+            setCurrentWeather(parsed.currentWeather);
             setDailyForecast(parsed.dailyForecast);
             setHourlyForecast(parsed.hourlyForecast);
+            setCheck(false);
+        }else{
+            setCheck(true);
         }
     }, []);
+    // to save data locally...
     useEffect(() => {
-        if (!weather || !dailyForecast || !hourlyForecast) return;
+        if (!currentWeather || !dailyForecast || !hourlyForecast) return;
         const newCache: WeatherCache = {
-            weather,
+            currentWeather,
             dailyForecast,
             hourlyForecast,
         };
         localStorage.setItem("WeatherCache", JSON.stringify(newCache));
-    }, [weather, dailyForecast, hourlyForecast]);
+    }, [currentWeather, dailyForecast, hourlyForecast]);
     
-    const getDataFromSearch = (weather: Weather,dailyForecast: DailyForecast,hourlyForecast: HourlyForecast ) => {
-        setWeather(weather);
+    const getDataFromSearch = (currentWeather: CurrentWeather,dailyForecast: DailyForecast,hourlyForecast: HourlyForecast ) => {
+        setCurrentWeather(currentWeather);
         setDailyForecast(dailyForecast);
         setHourlyForecast(hourlyForecast);
     };
 
-    if (!weather || !dailyForecast){
+
+    if (!currentWeather || !dailyForecast){
         return (
             <main className="flex justify-center items-center bg-[#bbafb9] h-screen w-screen">
                 <div className=" flex flex-col justify-center items-center gap-[20px] max-w-[1000px] w-8/10 h-85/100">
                     <Search sendData={getDataFromSearch} />
-                    <SkeletonCard />
+                    <SkeletonCard check = {check} />
                 </div>
             </main>
         );
@@ -52,7 +61,7 @@ export default function Home() {
         <main className="flex justify-center items-center bg-[#bbafb9] h-screen w-screen">
             <div className=" flex flex-col justify-center items-center gap-[20px] max-w-[1000px] w-8/10 h-85/100">
                 <Search sendData={getDataFromSearch} />
-                <Dashboard weather={weather} dailyForecast={dailyForecast} hourlyForecast={hourlyForecast}/>
+                <Dashboard currentWeather={currentWeather} dailyForecast={dailyForecast} hourlyForecast={hourlyForecast}/>
             </div>
         </main>
     );

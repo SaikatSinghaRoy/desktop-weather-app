@@ -1,4 +1,4 @@
-export interface Weather{
+export interface CurrentWeather{
     city : string;
     main : string;
     description : string;
@@ -28,7 +28,7 @@ export interface HourlyForecast{
 }
 
 export interface WeatherCache{
-    weather: Weather;
+    currentWeather: CurrentWeather;
     dailyForecast: DailyForecast;
     hourlyForecast: HourlyForecast;
 }

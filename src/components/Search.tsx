@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Weather, HourlyForecast, DailyForecast } from '@/utils/types';
+import { CurrentWeather, HourlyForecast, DailyForecast } from '@/utils/types';
 
 const apikey = process.env.NEXT_PUBLIC_API_KEY;
 const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
 
 type Props = {sendData : CallableFunction}
-
 export default function Search({ sendData }: Props) {
     const [city, setCity] = useState('');
     const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +28,7 @@ export default function Search({ sendData }: Props) {
                 const weatherData = await weatherRes.json();
                 const forecastData = await forecastRes.json();
 
-                const newWeather: Weather = {
+                const newCurrentWeather: CurrentWeather = {
                     city : city,
                     main : weatherData.weather[0].main,
                     description : weatherData.weather[0].description,
@@ -89,7 +88,7 @@ export default function Search({ sendData }: Props) {
                 });
                 const newHourlyForecast: HourlyForecast = { data: formattedHourlyForecast };
                             
-                sendData(newWeather, newDailyForecast, newHourlyForecast);
+                sendData(newCurrentWeather, newDailyForecast, newHourlyForecast);
                 setCity('');
             }
             catch (error) {
