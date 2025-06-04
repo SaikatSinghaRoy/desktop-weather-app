@@ -2,42 +2,10 @@
 import React from "react"
 import { Skeleton } from "./ui/skeleton"
 
-type Props = {check : Boolean}
+type Props = {}
 
-export default function SkeletonCard( {check}:Props ) {
-
-    // when there is no locally stored data...
-    if(check){
-        return (
-            <div className="bg-[#efeff0] h-full w-full rounded-[20px] flex flex-row justify-between">
-                {/* // left side of the dashboard */}
-                <div className="w-72/100 px-[40px] py-[20px]">
-                    <div className="w-full h-full flex justify-center items-center flex-col relative">
-                        <div className="absolute ">
-                            <p className="text-[#211a1b] text-[25px] font-[600]">Search for a city to get the latest weather updates</p>
-                        </div>
-                        <div>
-                            <p className="flex justify-start-safe text-[35px]/[20px] font-[800] text-[#5f5054] ">&bull;&bull;&bull;</p>
-                            <p className="text-[155px]/[110px] font-[700] text-[#e7e4e7]">Weather</p>
-                            <p className="flex justify-end-safe text-[35px]/[20px] font-[800] text-[#5f5054]">&bull;&bull;&bull;</p>
-                        </div>
-                    </div>
-                </div>
-                
-                {/* right side of the dashboard */}
-                <div className="w-28/100 p-[20px] text-center bg-[#e7e4e7] rounded-r-[20px]">
-                    <section className=" h-[120px] flex justify-center items-center">
-                        <p className="text-[16.5px]/[18px]">Stay prepared for upcoming weather with <span className="font-[600] ">accurate daily forecast data.</span></p>
-                    </section>
-                    <section className="mt-[60px] mb-[10px] ">
-                        <p className="text-[20px]/[16px] font-[600]">Weather forecast</p>
-                        <p className="text-[20px]/[16px] font-[600]"> in your pocket</p>
-                    </section>
-                </div>
-            </div>
-        )
-    }
-
+export default function SkeletonCard( {}:Props ) {
+    const date = new Date();
     return (
         <div className="bg-[#efeff0] h-full w-full rounded-[20px] flex flex-row justify-between">
             <div className="w-72/100 px-[40px] py-[20px]">
@@ -45,8 +13,8 @@ export default function SkeletonCard( {check}:Props ) {
                     <div className="w-5/10">
                         <Skeleton className="h-7 w-40 bg-[#cec7ce] rounded-2xl"/>
                     </div>
-                    <p className="w-3/10 text-[16px] mt-[7px]">
-                        {new Date().toLocaleDateString("en-US", {
+                    <p className="w-3/10 text-[16px] mt-[7.5px]">
+                        {date.toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",
@@ -72,9 +40,12 @@ export default function SkeletonCard( {check}:Props ) {
             
             {/* right side of the dashboard */}
             <div className="w-28/100 p-[20px] text-center bg-[#e7e4e7] rounded-r-[20px]">
-                <p className="text-[25px] font-[500]">Have a nice day</p>
+
+                <div className="mt-[8px] w-[220px] h-[30px] mx-auto">
+                    <Skeleton className="w-[220px] h-[30px] bg-[#cec7ce] rounded-xl" />
+                </div>
                 <p className="mt-1.5 text-[21.5px] font-[500] mb-[35px]">
-                    {new Date().toLocaleTimeString("en-US", {
+                    {date.toLocaleTimeString("en-US", {
                         hour: "2-digit",
                         minute: "2-digit",
                     })}
