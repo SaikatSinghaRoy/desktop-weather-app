@@ -56,7 +56,7 @@ export default function Search( {} : Props) {
     
     return (
         <div className="w-full flex justify-end items-center">
-            <div className=" max-sm:w-full max-sm:max-w-[300px] flex justify-between max-lg:rounded-[14px] lg:max-xl:rounded-[15px] rounded-[17px] border-solid border-[1.7px] ">
+            <div className=" max-sm:w-full max-sm:max-w-[400px] flex justify-between max-lg:rounded-[14px] lg:max-xl:rounded-[15px] rounded-[17px] border-solid border-[1.7px] ">
                 <input
                     className=" max-sm:p-[10px] sm:max-lg:p-[15px] max-sm:text-[12px] md:max-lg:text-[14.5px] lg:max-xl:px-[25px] lg:max-xl:py-[15px] lg:max-xl:text-[15px] xl:text-[16px] xl:pl-[20px] xl:pr-[40px] xl:py-[18px] bg-transparent outline-none border-hidden"
                     type="text"
