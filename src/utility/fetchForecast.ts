@@ -19,10 +19,11 @@ async function fetchForecast({city}: Props) {
 
         // // daysForecast is an object that stores one forecastData.list per day of exactly 09:00:00
         const daysForecast: { [key: string]: any } = {};
+        const todayDate = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
         for (let entry of forecastData.list) {
             if (entry.dt_txt.includes("09:00:00")) {
                 const date = entry.dt_txt.split(" ")[0]; // YYYY-MM-DD
-                if (!daysForecast[date]) {
+                if (date !== todayDate && !daysForecast[date]) {
                     daysForecast[date] = entry;
                 }
             }
